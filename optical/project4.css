@@ -1,0 +1,92 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background-color: #000; /* Black background for contrast */
+    color: #fff; /* White text for visibility */
+    overflow: hidden; /* Clean canvas, no scrolling */
+  }
+  
+  /* Project Container */
+  .project-page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 0, 0, 0.2); /* Transparent red background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  /* Creative Shapes */
+  .shape {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.3);
+    mix-blend-mode: screen; /* Experimental overlap effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: float 6s infinite alternate ease-in-out;
+    z-index: 2;
+  }
+  
+  /* Circle */
+  .shape.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    top: 10%;
+    left: 20%;
+  }
+  
+  /* Triangle */
+  .shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 150px solid rgba(255, 0, 0, 0.3);
+    bottom: 10%;
+    right: 30%;
+    transform: rotate(15deg);
+  }
+  
+  /* Rectangle */
+  .shape.rectangle {
+    width: 300px;
+    height: 150px;
+    top: 40%;
+    left: 50%;
+    transform: rotate(25deg);
+  }
+  
+  /* Floating Animation */
+  @keyframes float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px) rotate(10deg);
+    }
+  }
+
+  .sketch4{
+    margin-left: calc(50% - 300px)
+}
+
+  /* Text Overlay */
+  .project-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 3;
+  }
+  
