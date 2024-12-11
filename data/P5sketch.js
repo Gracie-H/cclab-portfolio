@@ -17,7 +17,7 @@ let growSpeed = 0.5;
 
 
 function setup() {
-  createCanvas(600, 400).parent("sketch-container");
+  createCanvas(600, 400).parent("sketch-container"); 
 
   // max size of data for daily
   for (let i = 0; i < Data.length; i++) {

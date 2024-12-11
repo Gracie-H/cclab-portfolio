@@ -68,3 +68,24 @@ a.button:hover {
     0% { transform: translateY(0px); }
     100% { transform: translateY(-15px); }
 }
+
+/* project-circle 更新 */
+.project-circle {
+    border: none; /* 移除白色边框 */
+    position: absolute;
+    animation: float 4s infinite ease-in-out alternate;
+    text-align: center;
+}
+
+/* 新增 bubble 样式 */
+.bubble {
+    animation: float 4s infinite ease-in-out alternate;
+    pointer-events: none; /* 禁止鼠标事件，纯装饰 */
+}
+
+/* 浮动动画 */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-20px); }
+}
+

@@ -3,107 +3,90 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Body Styling */
-body {
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* Navigation Bar */
-header {
-    background-color: #4CAF50;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-.nav-links {
-    list-style: none;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background-color: #000; /* Black background for contrast */
+    color: #fff; /* White text for visibility */
+    overflow: hidden; /* Clean canvas, no scrolling */
+  }
+  
+  /* Project Container */
+  .project-page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 0, 0, 0.2); /* Transparent red background */
     display: flex;
+    align-items: center;
     justify-content: center;
-}
+    overflow: hidden;
+  }
+  
+  /* Creative Shapes */
+  .shape {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.3);
+    mix-blend-mode: screen; /* Experimental overlap effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: float 6s infinite alternate ease-in-out;
+    z-index: 2;
+  }
+  
+  /* Circle */
+  .shape.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    top: 10%;
+    left: 20%;
+  }
+  
+  /* Triangle */
+  .shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 150px solid rgba(255, 0, 0, 0.3);
+    bottom: 10%;
+    right: 30%;
+    transform: rotate(15deg);
+  }
+  
+  /* Rectangle */
+  .shape.rectangle {
+    width: 300px;
+    height: 150px;
+    top: 40%;
+    left: 50%;
+    transform: rotate(25deg);
+  }
+  
+  /* Floating Animation */
+  @keyframes float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px) rotate(10deg);
+    }
+  }
 
-.nav-links li {
-    margin: 0 15px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #ffcc00;
-}
-
-/* Section Styling */
-section {
-    padding: 20px;
-    text-align: center;
-}
-
-/* About Section */
-#about {
-    background-color: #e8f5e9;
-    padding: 50px 20px;
-}
-
-#about h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    color: #2e7d32;
-}
-
-/* Projects Section */
-#projects {
-    background-color: #fff;
-    padding: 50px 20px;
-}
-
-#projects h1 {
-    font-size: 2.5em;
-    color: #1976d2;
-    margin-bottom: 20px;
-}
-
-#projects h2 {
-    font-size: 2em;
-    color: #555;
-}
-
-/* Button Styling */
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 10px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #388e3c;
-}
-
-.sketch2{
+  .sketch2{
     margin-left: calc(50% - 200px)
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-    }
-
-    #about h1, #projects h1 {
-        font-size: 2em;
-    }
-}
+  /* Text Overlay */
+  .project-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 3;
+  }
+  
