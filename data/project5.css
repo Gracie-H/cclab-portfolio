@@ -1,6 +1,6 @@
 /* General Reset */
 * {
-  margin: 0;
+  margin: 40px;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
@@ -88,4 +88,8 @@ body {
   mix-blend-mode: difference;
   position: relative;
   z-index: 3;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
 }

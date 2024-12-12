@@ -1,6 +1,6 @@
 /* General Reset */
 * {
-    margin: 0;
+  margin: 40px;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
@@ -89,5 +89,5 @@
     position: relative;
     z-index: 3;
   }
-  
+
   
