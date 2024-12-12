@@ -38,6 +38,10 @@ body {
     border-radius: 10px;
 }
 
+.sketch6{
+    margin-left: calc(50% - 300px)
+}
+
 .video-overlay h2 {
     margin: 0;
     font-size: 2.5em;

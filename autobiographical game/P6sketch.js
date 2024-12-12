@@ -187,7 +187,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(600, 400).parent("sketch-container");
   player = createVector(width / 2, height / 2);
   
   
