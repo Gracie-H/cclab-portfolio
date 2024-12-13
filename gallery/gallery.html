@@ -3,55 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Scrolling Gallery</title>
-    <link rel="stylesheet" href="gallery.css">
+    <title>Artwork Showcase</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section class="gallery-container">
-        <h1 class="gallery-title">Interactive Art Gallery</h1>
-        <div class="gallery-wrapper">
-            <div class="gallery" id="gallery">
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300" alt="Artwork 1">
-                    <p class="caption">Artwork 1</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300" alt="Artwork 2">
-                    <p class="caption">Artwork 2</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300" alt="Artwork 3">
-                    <p class="caption">Artwork 3</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300" alt="Artwork 4">
-                    <p class="caption">Artwork 4</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300" alt="Artwork 5">
-                    <p class="caption">Artwork 5</p>
-                </div>
-            </div>
+    <div class="gallery-container">
+        <!-- 单页作品展示 -->
+        <div class="gallery-page page1">
+            <img src="images/art1.jpg" alt="Artwork 1">
+            <p class="caption">Artwork 1 - Oil Painting</p>
         </div>
-    </section>
-
-    <!-- JavaScript -->
-    <script>
-        // 自动滚动效果
-        const gallery = document.getElementById("gallery");
-        let scrollAmount = 0;
-
-        function autoScroll() {
-            scrollAmount += 1; // 控制滚动速度
-            if (scrollAmount >= gallery.scrollWidth / 2) {
-                scrollAmount = 0;
-                gallery.scrollLeft = 0;
-            } else {
-                gallery.scrollLeft = scrollAmount;
-            }
-        }
-
-        setInterval(autoScroll, 30); // 每 30 毫秒滚动一点
-    </script>
+        <div class="gallery-page page2">
+            <img src="images/art2.jpg" alt="Artwork 2">
+            <p class="caption">Artwork 2 - Digital Art</p>
+        </div>
+        <div class="gallery-page page3">
+            <img src="images/art3.jpg" alt="Artwork 3">
+            <p class="caption">Artwork 3 - Watercolor</p>
+        </div>
+        <div class="gallery-page page4">
+            <img src="images/art4.jpg" alt="Artwork 4">
+            <p class="caption">Artwork 4 - Sketch</p>
+        </div>
+        <div class="gallery-page page5">
+            <img src="images/art5.jpg" alt="Artwork 5">
+            <p class="caption">Artwork 5 - Mixed Media</p>
+        </div>
+        <div class="gallery-page page6">
+            <img src="images/art6.jpg" alt="Artwork 6">
+            <p class="caption">Artwork 6 - Charcoal</p>
+        </div>
+        <div class="gallery-page page7">
+            <img src="images/art7.jpg" alt="Artwork 7">
+            <p class="caption">Artwork 7 - Abstract Art</p>
+        </div>
+        <div class="gallery-page page8">
+            <img src="images/art8.jpg" alt="Artwork 8">
+            <p class="caption">Artwork 8 - Collage</p>
+        </div>
+        <div class="gallery-page page9">
+            <img src="images/art9.jpg" alt="Artwork 9">
+            <p class="caption">Artwork 9 - Experimental</p>
+        </div>
+    </div>
 </body>
 </html>
