@@ -1,109 +1,56 @@
-/* 全局重置 */
+/* 基本样式重置 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* 页面基础设置 */
+body {
     font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    overflow-x: hidden; /* 禁止水平滚动 */
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    scroll-snap-type: y mandatory; /* 向下滚动吸附效果 */
-    overflow-y: scroll;
-    background-color: #111; /* 背景色 */
-}
-
-.gallery-container {
-    display: flex;
-    flex-direction: column; /* 垂直排列 */
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
+/* 每页样式 */
 .gallery-page {
-    height: 100vh; /* 每页高度占满视口 */
+    padding: 20px;
+    min-height: 100vh; /* 每页占满整个屏幕高度 */
     display: flex;
-    flex-direction: column;
-    justify-content: center; /* 垂直居中 */
-    align-items: center; /* 水平居中 */
-    scroll-snap-align: start; /* 吸附到每页 */
-    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* 每页背景颜色 */
 }
 
-/* 分别调整每张图片的大小 */
-.page1 img {
-    width: 35%;
+/* 网格布局 */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px; /* 网格间距 */
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* 图片样式 */
+.photo {
+    width: 100%;
     height: auto;
-    max-height: 40vh;
-}
-
-.page2 img {
-    width: 40%;
-    height: auto;
-    max-height: 50vh;
-}
-
-.page3 img {
-    width: 30%;
-    height: auto;
-    max-height: 45vh;
-}
-
-.page4 img {
-    width: 45%;
-    height: auto;
-    max-height: 50vh;
-}
-
-.page5 img {
-    width: 38%;
-    height: auto;
-    max-height: 40vh;
-}
-
-.page6 img {
-    width: 50%;
-    height: auto;
-    max-height: 60vh;
-}
-
-.page7 img {
-    width: 28%;
-    height: auto;
-    max-height: 45vh;
-}
-
-.page8 img {
-    width: 32%;
-    height: auto;
-    max-height: 40vh;
-}
-
-.page9 img {
-    width: 37%;
-    height: auto;
-    max-height: 50vh;
-}
-
-img {
-    object-fit: contain; /* 保持比例居中显示 */
-    border-radius: 10px; /* 圆角 */
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+    object-fit: contain; /* 保持原比例 */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
-img:hover {
-    transform: scale(1.05); /* 悬停放大 */
+/* 鼠标悬停放大效果 */
+.photo:hover {
+    transform: scale(1.05);
 }
 
-.caption {
-    margin-top: 20px; /* 标题与图片间隔 */
-    font-size: 1.2rem;
-    color: #ddd;
-    background-color: rgba(0, 0, 0, 0.6); /* 半透明背景 */
-    padding: 8px 16px;
-    border-radius: 5px;
-    text-align: center;
+/* 大小控制 */
+.photo.tall {
+    grid-row: span 2; /* 占据两行高度 */
+}
+
+.photo.wide {
+    grid-column: span 2; /* 占据两列宽度 */
 }
