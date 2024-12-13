@@ -4,14 +4,14 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: scroll; /* Prevent horizontal scroll */
 }
 
 /* Fullscreen Video Styling */
 .video-container {
     position: relative;
     height: 100vh; /* Full viewport height */
-    overflow: hidden;
+    overflow: scroll;
 }
 
 #bg-video {
@@ -26,6 +26,7 @@ body {
 }
 
 .video-overlay {
+    margin-bottom: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,7 +40,7 @@ body {
 }
 
 .sketch6{
-    margin-left: calc(50% - 300px)
+    margin-left: calc(50% - 300px);
 }
 
 .video-overlay h2 {

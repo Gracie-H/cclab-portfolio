@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Scrolling Gallery</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <section class="gallery-container">
+        <h1 class="gallery-title">Interactive Art Gallery</h1>
+        <div class="gallery-wrapper">
+            <div class="gallery" id="gallery">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300" alt="Artwork 1">
+                    <p class="caption">Artwork 1</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300" alt="Artwork 2">
+                    <p class="caption">Artwork 2</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300" alt="Artwork 3">
+                    <p class="caption">Artwork 3</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300" alt="Artwork 4">
+                    <p class="caption">Artwork 4</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300" alt="Artwork 5">
+                    <p class="caption">Artwork 5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // 自动滚动效果
+        const gallery = document.getElementById("gallery");
+        let scrollAmount = 0;
+
+        function autoScroll() {
+            scrollAmount += 1; // 控制滚动速度
+            if (scrollAmount >= gallery.scrollWidth / 2) {
+                scrollAmount = 0;
+                gallery.scrollLeft = 0;
+            } else {
+                gallery.scrollLeft = scrollAmount;
+            }
+        }
+
+        setInterval(autoScroll, 30); // 每 30 毫秒滚动一点
+    </script>
+</body>
+</html>

@@ -9,7 +9,7 @@
 body {
   background-color: #000; /* Black background for contrast */
   color: #fff; /* White text for visibility */
-  overflow: hidden; /* Clean canvas, no scrolling */
+  overflow: scroll; /* Clean canvas, no scrolling */
 }
 
 /* Project Container */
@@ -21,7 +21,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 /* Creative Shapes */

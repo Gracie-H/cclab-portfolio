@@ -6,10 +6,15 @@
     font-family: 'Arial', sans-serif;
   }
   
+
+html {
+  scroll-behavior: smooth; /* 平滑滚动 */
+}
+
   body {
     background-color: #000; /* Black background for contrast */
     color: #fff; /* White text for visibility */
-    overflow: hidden; /* Clean canvas, no scrolling */
+    overflow: scrool; /* Clean canvas, no scrolling */
   }
   
   /* Project Container */
@@ -21,9 +26,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: scrool;
   }
   
+  section {
+    min-height: 100vh; /* 每个部分高度为视口高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
   /* Creative Shapes */
   .shape {
     position: absolute;
@@ -80,6 +94,7 @@
 
   /* Text Overlay */
   .project-text {
+
     font-size: 2.5rem;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.8);
@@ -89,4 +104,6 @@
     position: relative;
     z-index: 3;
   }
+  
+  
   
