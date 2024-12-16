@@ -86,3 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         circle.style.border = "none";
     });
 });
+
+document.getElementById("learnMoreButton").addEventListener("click", function() {
+    alert("Hi! I'm Gracie, exploring interactive and experimental design with passion!");
+});
