@@ -80,7 +80,7 @@ a.button:hover {
 
 /* project-circle 更新 */
 .project-circle {
-    border: none; /* 移除白色边框 */
+    border: none; 
     position: absolute;
     animation: float 4s infinite ease-in-out alternate;
     text-align: center;
@@ -89,22 +89,22 @@ a.button:hover {
 /* 新增 bubble 样式 */
 .bubble {
     animation: float 4s infinite ease-in-out alternate;
-    pointer-events: none; /* 禁止鼠标事件，纯装饰 */
+    pointer-events: none;
     font-weight: bold;
     
 }
 
-/* 浮动动画 */
+
 @keyframes float {
     0% { transform: translateY(0px); }
     100% { transform: translateY(-20px); }
 }
 
 
-/* 通用按钮样式 */
+
 .button {
     display: inline-block;
-    background-color: #4A90E2;
+    background-color: red;
     color: white;
     border: none;
     padding: 10px 20px;
