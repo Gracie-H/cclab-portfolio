@@ -1,0 +1,57 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* 返回按钮 */
+button {
+    background-color: #bd3d3d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #c13333;
+}
+
+/* 三个圆形按钮的容器 */
+.typography-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* 圆形按钮 */
+.typography-links a {
+    width: 180px;
+    height: 180px;
+    background-color: #da2929;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 50%;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.typography-links a:hover {
+    background-color: #be3232;
+    transform: scale(1.1);
+}
