@@ -5,6 +5,7 @@ let prevFrame;
 
 function setup() {
   createCanvas(600, 500);
+  cnv.parent('canvas-container');
   capture = createCapture(VIDEO);
   capture.size(width, height);
   capture.hide();
