@@ -1,66 +1,101 @@
 let capture;
 let pixelBlocks = [];
+let mic;
+let prevFrame;
 
 function setup() {
-    let canvas = createCanvas(600, 400);
-    canvas.parent("canvas-container"); // 让 p5.js 画布放入 div
-    capture = createCapture(VIDEO);
-    capture.size(width, height);
-    capture.hide();
-    frameRate(30);
+  createCanvas(600, 500);
+  capture = createCapture(VIDEO);
+  capture.size(width, height);
+  capture.hide();
+
+  mic = new p5.AudioIn();
+  mic.start();
+
+  prevFrame = createImage(width, height);
 }
 
 function draw() {
-    background(0);
+  background(0);
 
-    // **实时显示摄像机**
-    image(capture, 0, 0, width, height);
+  // 镜像显示摄像头图像
+  push();
+  translate(width, 0);
+  scale(-1, 1);
+  image(capture, 0, 0, width, height);
+  pop();
 
-    // **绘制像素方块**
-    for (let i = pixelBlocks.length - 1; i >= 0; i--) {
-        let p = pixelBlocks[i];
-        p.opacity -= 3; // 透明度降低
+  capture.loadPixels();
+  prevFrame.loadPixels();
 
-        if (p.opacity <= 0) {
-            pixelBlocks.splice(i, 1); // 删除透明的方块
-        } else {
-            fill(p.color[0], p.color[1], p.color[2], p.opacity);
-            noStroke();
-            rect(p.x, p.y, p.size, p.size);
-        }
+  // 🎤 声音触发：声音越大喷越多
+  let vol = mic.getLevel();
+  if (vol > 0.03) {
+    triggerPixelSpray(15);
+  }
+
+  // ✋ 手势触发（图像变化检测）
+  let changed = false;
+  let threshold = 25;
+  for (let y = height / 3; y < height * 2 / 3; y += 10) {
+    for (let x = width / 3; x < width * 2 / 3; x += 10) {
+      let i = (y * width + x) * 4;
+      let r1 = capture.pixels[i];
+      let r2 = prevFrame.pixels[i];
+      if (abs(r1 - r2) > threshold) {
+        changed = true;
+        break;
+      }
+    }
+    if (changed) break;
+  }
+
+  if (changed) {
+    triggerPixelSpray(10);
+  }
+
+  // ✨ 鼠标吸引 + 粒子更新
+  for (let i = pixelBlocks.length - 1; i >= 0; i--) {
+    let p = pixelBlocks[i];
+
+    // 鼠标靠近吸引
+    let d = dist(mouseX, mouseY, p.x, p.y);
+    if (d < 80) {
+      let angle = atan2(mouseY - p.y, mouseX - p.x);
+      p.x += cos(angle) * 1.5;
+      p.y += sin(angle) * 1.5;
     }
 
-    // **每隔一定帧数截取像素**
-    if (frameCount % 10 === 0) {
-        captureFacePixels();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.opacity -= 3;
+    if (p.opacity <= 0) {
+      pixelBlocks.splice(i, 1);
+    } else {
+      fill(p.color[0], p.color[1], p.color[2], p.opacity);
+      noStroke();
+      rect(p.x, p.y, p.size, p.size);
     }
+  }
+
+  // 更新当前帧为下一帧对比
+  prevFrame.copy(capture, 0, 0, width, height, 0, 0, width, height);
 }
 
-// **像素格动态变化**
-function captureFacePixels() {
-    let w = capture.width;
-    let h = capture.height;
-
-    let faceRegions = [
-        { x: w * 0.3, y: h * 0.35 }, // 眼睛
-        { x: w * 0.7, y: h * 0.35 }, 
-        { x: w * 0.5, y: h * 0.45 }, // 鼻子
-        { x: w * 0.4, y: h * 0.6 }, // 嘴
-        { x: w * 0.6, y: h * 0.6 }  
-    ];
-
-    for (let region of faceRegions) {
-        let px = region.x + random(-10, 10);
-        let py = region.y + random(-10, 10);
-        let pxSize = random(10, 20);
-        let color = capture.get(px, py);
-
-        pixelBlocks.push({
-            x: px,
-            y: py,
-            size: pxSize,
-            color: color,
-            opacity: 255
-        });
-    }
+// 🚀 统一的像素喷发函数
+function triggerPixelSpray(amount) {
+  for (let i = 0; i < amount; i++) {
+    let px = random(width);
+    let py = random(height);
+    let col = capture.get(px, py);
+    pixelBlocks.push({
+      x: px,
+      y: py,
+      vx: random(-1, 1),
+      vy: random(-1, 1),
+      size: random(10, 50),
+      color: col,
+      opacity: 255
+    });
+  }
 }
