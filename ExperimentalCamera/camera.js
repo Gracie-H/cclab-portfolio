@@ -5,7 +5,6 @@ let prevFrame;
 
 function setup() {
   createCanvas(600, 500);
-  cnv.parent('canvas-container');
   capture = createCapture(VIDEO);
   capture.size(width, height);
   capture.hide();
@@ -36,22 +35,22 @@ function draw() {
   }
 
   // ✋ 手势触发（图像变化检测）
-  let changed = false;
-  let threshold = 25;
+  let imageChanged = false;
+  let pixelThreshold = 25;  // 改名为 pixelThreshold
   for (let y = height / 3; y < height * 2 / 3; y += 10) {
     for (let x = width / 3; x < width * 2 / 3; x += 10) {
       let i = (y * width + x) * 4;
       let r1 = capture.pixels[i];
       let r2 = prevFrame.pixels[i];
-      if (abs(r1 - r2) > threshold) {
-        changed = true;
+      if (abs(r1 - r2) > pixelThreshold) {  // 使用新的变量名
+        imageChanged = true;
         break;
       }
     }
-    if (changed) break;
+    if (imageChanged) break;
   }
 
-  if (changed) {
+  if (imageChanged) {
     triggerPixelSpray(10);
   }
 
