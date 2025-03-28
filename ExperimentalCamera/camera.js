@@ -36,7 +36,7 @@ function draw() {
   bgColor = map(vol, 0, 0.2, 0, 255);
   background(0);
 
-  // 左边实时镜像摄像头
+
   push();
   translate(640, 0);
   scale(-1, 1);
@@ -48,10 +48,10 @@ function draw() {
   capture.loadPixels();
   prevFrame.loadPixels();
 
-  // 只有声音大时才触发喷发和水波
+
   if (vol > 0.02) {
     triggerPixelSpray(10);
-    ripples.push({ x: 960, y: 240, r: 10 }); // 👈 改成右边中心
+    ripples.push({ x: 960, y: 240, r: 10 }); 
   }
 
   dandelion.update();
@@ -92,7 +92,7 @@ function draw() {
     }
   }
 
-  // 拖尾效果在右边显示（延迟 slice）
+
   waveBuffer.unshift(capture.get());
   if (waveBuffer.length > numSlices) waveBuffer.pop();
   let sliceW = 640 / numSlices;
@@ -105,7 +105,7 @@ function draw() {
     );
   }
 
-  // 👇 右边水波纹在拖尾上层绘制
+
   for (let r of ripples) {
     noFill();
     stroke(255, 100);
