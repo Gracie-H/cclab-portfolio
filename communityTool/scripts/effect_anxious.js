@@ -45,9 +45,9 @@ function setup() {
 }
 
 function draw() {
-  background(242, 239, 229, 25); // 米色宣纸背景
+  background(242, 239, 229, 25);
 
-  // 背景粒子：缓慢移动
+  // 背景粒子
   for (let b of bgParticles) {
     fill(200, 180, 160, b.alpha);
     ellipse(b.x, b.y, b.r);
@@ -57,13 +57,9 @@ function draw() {
     if (b.y < 0 || b.y > height) b.dy *= -1;
   }
 
-  // 呼吸中心晕圈
+  // 保留节奏变量控制
   pulse += pulseDir * 0.3;
   if (pulse > 10 || pulse < -2) pulseDir *= -1;
-  fill(180, 170, 150, 15);
-  ellipse(width / 2, height / 2, 220 + pulse * 2.5);
-  fill(180, 170, 150, 10);
-  ellipse(width / 2, height / 2, 160 + pulse * 2);
 
   // 点 + 羽化晕边
   for (let p of points) {
@@ -72,7 +68,6 @@ function draw() {
     if (p.x < 0 || p.x > width) p.vx *= -1;
     if (p.y < 0 || p.y > height) p.vy *= -1;
 
-    // 羽化晕圈（用 radialGradient 模拟墨染）
     let g = drawingContext.createRadialGradient(p.x, p.y, 1, p.x, p.y, p.r * 2);
     g.addColorStop(0, 'rgba(100, 80, 60, 0.3)');
     g.addColorStop(1, 'rgba(100, 80, 60, 0)');
@@ -82,7 +77,7 @@ function draw() {
     trails.push({ x: p.x, y: p.y, r: p.r, alpha: 40 });
   }
 
-  // 自然纹理式连线
+  // 连线
   stroke(120, 100, 80, 40);
   strokeWeight(0.4);
   for (let l of lines) {
@@ -103,7 +98,7 @@ function draw() {
   }
   trails = trails.filter(t => t.alpha > 0);
 
-  // ripple 涟漪：墨圈感
+  // ripple 涟漪
   for (let r of ripples) {
     stroke(100, 80, 60, r.alpha);
     strokeWeight(1);
