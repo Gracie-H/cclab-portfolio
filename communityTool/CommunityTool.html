@@ -1,25 +1,119 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Urban Healing Tool</title>
-  <link rel="stylesheet" href="CommunityTool.css">
+  <link rel="stylesheet" href="CommunityTool.css" />
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       background: url('2222.jpg') no-repeat center center fixed;
       background-size: cover;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    /* 泡泡样式 */
+    .bubble {
+      position: absolute;
+      bottom: -50px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: rise 10s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* 卡片样式 */
+    .quiz-page {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 10% auto;
+      padding: 40px 30px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+
+    .quiz-page h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-page p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 1);
     }
   </style>
 </head>
 <body>
+
+  <!-- 泡泡容器 -->
+  <div id="bubbles"></div>
+
+  <!-- 主卡片 -->
   <div class="quiz-page">
-    <h1>Welcome 🌿</h1>
+    <h1>Welcome to The Healing Space</h1>
     <p>This is your healing check-in. Ready?</p>
-    <button onclick="startQuiz()">Start Quiz</button>
+    <button onclick="startQuiz()">Let's get started.</button>
   </div>
+
   <script>
     function startQuiz() {
       location.href = 'quiz.html';
     }
+
+    // 生成泡泡
+    const bubbleContainer = document.getElementById('bubbles');
+    for (let i = 0; i < 20; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 20 + 10;
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.animationDuration = 8 + Math.random() * 5 + 's';
+      bubble.style.animationDelay = Math.random() * 5 + 's';
+      bubbleContainer.appendChild(bubble);
+    }
   </script>
+
 </body>
 </html>
