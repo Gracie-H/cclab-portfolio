@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background: url('7777.jpg') no-repeat center fixed;
+      background-size:cover;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+      position: relative;
+    }
+
+    .quiz-page {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 40px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeSlideIn 0.8s ease;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) rotateX(10deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .question {
+      margin-bottom: 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .options button {
+      background: linear-gradient(135deg, #48d9e9, #ffffff);
+      color: #333;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 26px;
+      margin: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .options button:hover {
+      background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+      transform: scale(1.05) rotate(-1deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-page" id="quiz-container"></div>
+
+  <script>
+    const questions = [
+      "If your mind had a color right now, what would it be?",
+      "How does time feel to you today?",
+      "If your thoughts made a sound, what would they be?",
+      "What kind of space do you crave right now?",
+      "What’s your energy level today?",
+      "Which object feels most comforting?",
+      "What do you want to let go of?",
+      "What’s one thing your body needs right now?"
+    ];
+
+    const options = [
+      ["Green", "Blue", "Red", "Grey"],
+      ["Flowing naturally", "Like it’s racing", "Loop", "Like it stopped"],
+      ["Gentle rainfall", "Alarms beeping", "Buzzing", "Stillness"],
+      ["A forest trail", "A busy city street", "My own bed", "A quiet museum"],
+      ["Warmth", "Movement", "Almost none", "Too much, actually"],
+      ["A warm cup", "A mirror", "A rock", "A candle"],
+      ["Pressure", "Loneliness", "Regret", "Anger"],
+      ["Light", "Rest", "Stillness", "Warmth"]
+    ];
+
+    let currentIndex = 0;
+
+    function showQuestion(index) {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = `
+        <div class="question">${index + 1}. ${questions[index]}</div>
+        <div class="options">
+          ${options[index].map(option => `
+            <button onclick="selectAnswer(${index}, '${option}')">${option}</button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function selectAnswer(index, value) {
+      localStorage.setItem('answer' + (index + 1), value);
+      currentIndex++;
+      if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+      } else {
+        location.href = 'result.html';
+      }
+    }
+
+    showQuestion(currentIndex);
+  </script>
+</body>
+</html>

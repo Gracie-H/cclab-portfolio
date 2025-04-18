@@ -1,0 +1,137 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decompression Journey</title>
+  <link rel="stylesheet" href="CommunityTool.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(120deg, #fce4ec, #e1f5fe);
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+    .intro-screen {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 2;
+    }
+    .intro-screen h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    .intro-screen button {
+      background-color: #81d4fa;
+      color: #333;
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .intro-screen button:hover {
+      background-color: #4fc3f7;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    #gameSection {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="intro-screen" id="intro">
+    <h2>Take a breath before we begin 🌬️</h2>
+    <p>You're entering a gentle space. Let’s decompress with 3 short activities.</p>
+    <button onclick="startGame()">Begin</button>
+  </div>
+
+  <div id="gameSection">
+    <div id="minigame1" class="minigame-page">
+      <h2>MiniGame 1: Drag the Calm Waters</h2>
+      <div id="gameCanvas1"></div>
+      <button onclick="goToMiniGame(2)">Next</button>
+    </div>
+
+    <div id="minigame2" class="minigame-page" style="display: none;">
+      <h2>MiniGame 2: Hold to Grow a Tree</h2>
+      <div id="gameCanvas2"></div>
+      <button onclick="goToMiniGame(3)">Next</button>
+    </div>
+
+    <div id="minigame3" class="minigame-page" style="display: none;">
+      <h2>MiniGame 3: Control the Floating People</h2>
+      <div id="gameCanvas3"></div>
+      <button onclick="location.href='end.html'">Finish</button>
+    </div>
+  </div>
+
+  <script src="MiniGame1_Wave.js"></script>
+  <script src="MiniGame2_TreeGrow.js"></script>
+  <script src="MiniGame3_FloatingPeople.js"></script>
+
+  <script>
+    function startGame() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('gameSection').style.display = 'block';
+      goToMiniGame(1);
+    }
+
+    function goToMiniGame(n) {
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById('minigame' + i).style.display = (i === n ? 'block' : 'none');
+      }
+
+      if (n === 1) new p5(waveSketch, 'gameCanvas1');
+      if (n === 2) new p5(treeSketch, 'gameCanvas2');
+      if (n === 3) new p5(peopleSketch, 'gameCanvas3');
+    }
+
+    // visual bg
+    const bg = document.getElementById('bgCanvas');
+    const ctx = bg.getContext('2d');
+    bg.width = window.innerWidth;
+    bg.height = window.innerHeight;
+    const dots = [];
+    for (let i = 0; i < 60; i++) {
+      dots.push({
+        x: Math.random() * bg.width,
+        y: Math.random() * bg.height,
+        r: Math.random() * 6 + 3,
+        dx: Math.random() * 0.6 - 0.3,
+        dy: Math.random() * 0.6 - 0.3,
+        color: `rgba(${200 + Math.random() * 55}, ${220 + Math.random() * 30}, 255, 0.25)`
+      });
+    }
+    function animateBg() {
+      ctx.clearRect(0, 0, bg.width, bg.height);
+      for (let d of dots) {
+        d.x += d.dx;
+        d.y += d.dy;
+        if (d.x < 0 || d.x > bg.width) d.dx *= -1;
+        if (d.y < 0 || d.y > bg.height) d.dy *= -1;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = d.color;
+        ctx.fill();
+      }
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+  </script>
+</body>
+</html> -->

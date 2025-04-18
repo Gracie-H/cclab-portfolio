@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Healing Space</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: black;
+    }
+    canvas {
+      display: block;
+    }
+    #text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-size: 1.4em;
+      padding: 20px;
+      max-width: 600px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      transition: opacity 1s ease;
+    }
+    #saveBtn, #restartBtn {
+      position: absolute;
+      padding: 12px 24px;
+      background: white;
+      color: #333;
+      border: none;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 3;
+    }
+    #saveBtn {
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #restartBtn {
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+  <div id="text"></div>
+  <button id="saveBtn">Download This Moment</button>
+  <button id="restartBtn" onclick="location.href='quiz.html'">Restart</button>
+  <audio id="healingMusic" loop autoplay></audio>
+  <audio id="effectSound"></audio>
+
+  <!-- 加载顺序不能错！ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+
+  <script>
+    const type = localStorage.getItem('healingType') || 'happy';
+    const music = document.getElementById('healingMusic');
+    const sfx = document.getElementById('effectSound');
+    const textBox = document.getElementById('text');
+
+    const visuals = {
+      happy: {
+        bg: ['#ffecd2', '#fcb69f'],
+        text: "You are part of the living light. Let joy circulate.",
+        music: 'https://cdn.pixabay.com/download/audio/2022/12/27/audio_e0e7787334.mp3?filename=joy-loop.mp3',
+        sfx: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_f63cce9749.mp3?filename=click-soft-110466.mp3',
+        script: 'effect_happy.js'
+      },
+      anxious: {
+        bg: ['#cfd9df', '#e2ebf0'],
+        text: "You are safe here. Let tension melt.",
+        music: 'https://cdn.pixabay.com/download/audio/2022/12/20/audio_5ebf78146a.mp3?filename=calm-pad.mp3',
+        sfx: 'https://cdn.pixabay.com/download/audio/2021/11/17/audio_956c88a0f6.mp3?filename=click-deep.mp3',
+        script: 'effect_anxious.js'
+      },
+      angry: {
+        bg: ['#ff9a9e', '#fad0c4'],
+        text: "The fire softens. You do not need to fight the moment.",
+        music: 'https://cdn.pixabay.com/download/audio/2022/12/15/audio_1c0ddc0512.mp3?filename=soft-synth-dream.mp3',
+        sfx: 'https://cdn.pixabay.com/download/audio/2023/01/15/audio_b82a9fe5d1.mp3?filename=burst-click.mp3',
+        script: 'effect_angry.js'
+      },
+      stressed: {
+        bg: ['#dceefb', '#e0c3fc'],
+        text: "You’ve been holding much. Let go, just for now.",
+        music: 'https://cdn.pixabay.com/download/audio/2022/12/19/audio_3ce8df93c6.mp3?filename=ambient-wave.mp3',
+        sfx: 'https://cdn.pixabay.com/download/audio/2022/03/30/audio_9f9a7fe91c.mp3?filename=click-bell.mp3',
+        script: 'effect_stressed.js'
+      },
+      fearful: {
+        bg: ['#d3cce3', '#e9e4f0'],
+        text: "This space will not abandon you. Let light return.",
+        music: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_02fd9a0f82.mp3?filename=safe-space.mp3',
+        sfx: 'https://cdn.pixabay.com/download/audio/2022/10/19/audio_8fd3d49aa5.mp3?filename=deep-tap.mp3',
+        script: 'effect_fearful.js'
+      }
+    };
+
+    const theme = visuals[type] || visuals['happy'];
+    document.body.style.background = `linear-gradient(to bottom, ${theme.bg[0]}, ${theme.bg[1]})`;
+    music.src = theme.music;
+    textBox.innerText = theme.text;
+
+    function playSFX() {
+      sfx.src = theme.sfx;
+      sfx.play();
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      saveCanvas('healing-moment', 'png');
+    });
+
+    // 加载对应效果脚本
+    const effectScript = theme.script;
+    const scriptElement = document.createElement('script');
+    scriptElement.src = 'scripts/' + effectScript;
+    document.body.appendChild(scriptElement);
+  </script>
+</body>
+</html>

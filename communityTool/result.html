@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Result</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: url('9999.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .result-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    canvas {
+      border-radius: 50%;
+      margin: 20px auto;
+      display: block;
+    }
+
+    textarea {
+      width: 90%;
+      height: 100px;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #ffffff;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="result-box">
+    <h2 id="resultTitle">Your Result</h2>
+    <canvas id="visual" width="200" height="200"></canvas>
+    <p id="suggestion"></p>
+    <textarea id="reflection" placeholder="Write what you're feeling..."></textarea>
+    <button onclick="location.href='end.html'">Continue to Healing</button>
+    <audio id="sound" loop></audio>
+  </div>
+
+  <script>
+    const emotionTags = {
+      "Green": "happy", "Flowing naturally": "happy", "Gentle rainfall": "happy", "A forest trail": "happy", "A warm cup": "happy", "Warmth": "happy", "Light": "happy",
+      "Grey": "anxious", "Like it’s racing": "anxious", "Alarms beeping": "anxious", "Pressure": "anxious", "Too much, actually": "anxious",
+      "Red": "angry", "Loop": "angry", "A busy city street": "angry", "Anger": "angry", "Movement": "angry",
+      "Blue": "stressed", "Enough to get through": "stressed", "A mirror": "stressed", "A quiet museum": "stressed", "A little bit": "stressed",
+      "My own bed": "fearful", "A rock": "fearful", "Regret": "fearful", "Stillness": "fearful", "Loneliness": "fearful", "Almost none": "fearful", "Like it stopped": "fearful"
+    };
+
+    const emotionStyles = {
+      happy: {
+        color: '#c8e6c9',
+        audio: 'https://cdn.pixabay.com/audio/2023/03/24/audio_89a6e47484.mp3',
+        text: "You're glowing with calm energy. Breathe and carry the light."
+      },
+      anxious: {
+        color: '#b0bec5',
+        audio: 'https://cdn.pixabay.com/audio/2023/03/16/audio_e15ef48b68.mp3',
+        text: "Your thoughts may be racing. Let’s slow down, one breath at a time."
+      },
+      angry: {
+        color: '#ffcdd2',
+        audio: 'https://cdn.pixabay.com/audio/2023/04/13/audio_6f4d74e9c9.mp3',
+        text: "You’re holding strong feelings. Let’s release them through presence."
+      },
+      stressed: {
+        color: '#bbdefb',
+        audio: 'https://cdn.pixabay.com/audio/2023/03/29/audio_dcfab49153.mp3',
+        text: "You’ve been holding it together. You deserve a pause."
+      },
+      fearful: {
+        color: '#d1c4e9',
+        audio: 'https://cdn.pixabay.com/audio/2022/10/28/audio_1c88784e01.mp3',
+        text: "It’s okay to feel uncertain. Let’s rebuild a safe inner space."
+      }
+    };
+
+    let scores = { happy: 0, anxious: 0, angry: 0, stressed: 0, fearful: 0 };
+    for (let i = 1; i <= 8; i++) {
+      const ans = localStorage.getItem('answer' + i);
+      const emotion = emotionTags[ans];
+      if (emotion) scores[emotion]++;
+    }
+    const topEmotion = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+    const result = emotionStyles[topEmotion];
+
+    document.getElementById('resultTitle').innerText = `Your emotional state: ${topEmotion.toUpperCase()}`;
+    document.getElementById('suggestion').innerText = result.text;
+
+    const audio = document.getElementById('sound');
+    audio.src = result.audio;
+    document.body.addEventListener('click', () => audio.play(), { once: true });
+
+    localStorage.setItem('healingType', topEmotion);
+
+    // pulse animation
+    const canvas = document.getElementById('visual');
+    const ctx = canvas.getContext('2d');
+    let radius = 80;
+    let growth = 1;
+
+    function drawPulse() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
+      ctx.fillStyle = result.color;
+      ctx.fill();
+      radius += growth;
+      if (radius > 90 || radius < 70) growth *= -1;
+      requestAnimationFrame(drawPulse);
+    }
+    drawPulse();
+
+    // store textarea reflection
+    const reflectionBox = document.getElementById('reflection');
+    const saved = localStorage.getItem('reflection');
+    if (saved) reflectionBox.value = saved;
+    reflectionBox.addEventListener('input', () => {
+      localStorage.setItem('reflection', reflectionBox.value);
+    });
+  </script>
+</body>
+</html>
