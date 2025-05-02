@@ -1,6 +1,6 @@
 body {
   font-family: 'Helvetica Neue', sans-serif;
-  background: linear-gradient(135deg, #e3f2fd, #ffffff); /* 备选背景 */
+  background: linear-gradient(135deg, #e3f2fd, #ffffff); 
   color: #333;
   margin: 0;
   height: 100vh;
@@ -12,10 +12,10 @@ body {
   position: relative;
 }
 
-/* 浮动内容容器 */
+
 .quiz-page, .result-box {
-  background: rgba(255, 255, 255, 0.15); /* 加一点磨砂透明感 */
-  backdrop-filter: blur(8px);            /* 背后模糊效果 */
+  background: rgba(255, 255, 255, 0.15); 
+  backdrop-filter: blur(8px);          
   border-radius: 16px;
   padding: 40px;
   width: 90%;

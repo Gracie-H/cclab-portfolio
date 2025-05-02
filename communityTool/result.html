@@ -121,7 +121,7 @@
 
     localStorage.setItem('healingType', topEmotion);
 
-    // pulse animation
+
     const canvas = document.getElementById('visual');
     const ctx = canvas.getContext('2d');
     let radius = 80;
@@ -139,7 +139,7 @@
     }
     drawPulse();
 
-    // store textarea reflection
+    // store 
     const reflectionBox = document.getElementById('reflection');
     const saved = localStorage.getItem('reflection');
     if (saved) reflectionBox.value = saved;

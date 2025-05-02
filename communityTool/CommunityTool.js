@@ -9,14 +9,14 @@ let answer1 = '';
 let answer2 = '';
 let answer3 = '';
 
-// 页面加载后检查 localStorage
+
 window.addEventListener("DOMContentLoaded", () => {
   const saved1 = localStorage.getItem('answer1');
   const saved2 = localStorage.getItem('answer2');
   const saved3 = localStorage.getItem('answer3');
   const savedSug = localStorage.getItem('suggestion');
 
-  // 恢复 textarea 内容
+
   const reflectionBox = document.getElementById('reflection');
   const savedReflection = localStorage.getItem('reflection');
   if (savedReflection) reflectionBox.value = savedReflection;
@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem('reflection', reflectionBox.value);
   });
 
-  // 如果有历史答案，就直接展示结果页
+
   if (saved1 && saved2 && saved3 && savedSug) {
     answer1 = saved1;
     answer2 = saved2;
@@ -96,7 +96,7 @@ function showResult() {
     audio.src = 'https://cdn.pixabay.com/audio/2023/03/24/audio_89a6e47484.mp3';
   }
 
-  // 保存答案和建议到 localStorage
+
   localStorage.setItem('answer1', answer1);
   localStorage.setItem('answer2', answer2);
   localStorage.setItem('answer3', answer3);

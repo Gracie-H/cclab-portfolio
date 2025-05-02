@@ -8,7 +8,7 @@
 //       let canvas = p.createCanvas(400, 400);
 //       canvas.parent('gameCanvas1');
   
-//       // ✅ 保证 canvas 不遮挡按钮
+
 //       canvas.style('z-index', '-1');
 //       canvas.style('position', 'absolute');
 //       canvas.style('pointer-events', 'none');

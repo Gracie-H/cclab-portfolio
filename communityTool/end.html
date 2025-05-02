@@ -59,7 +59,7 @@
   <audio id="healingMusic" loop autoplay></audio>
   <audio id="effectSound"></audio>
 
-  <!-- 加载顺序不能错！ -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
 
@@ -121,7 +121,7 @@
       saveCanvas('healing-moment', 'png');
     });
 
-    // 加载对应效果脚本
+
     const effectScript = theme.script;
     const scriptElement = document.createElement('script');
     scriptElement.src = 'scripts/' + effectScript;

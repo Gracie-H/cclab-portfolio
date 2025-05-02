@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vacation Selector</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #f0f8ff;
+      padding: 40px;
+      text-align: center;
+    }
+
+    select, button {
+      font-size: 1em;
+      margin: 10px;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #4b8bbe;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3778b2;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      white-space: pre-line;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>Find Your Ideal Vacation</h1>
+  <p>Choose what you're feeling and doing today:</p>
+
+  <label>Emotion:
+    <select id="emotion">
+      <option value="Calm">Calm</option>
+      <option value="Angry">Angry</option>
+      <option value="Romantic">Romantic</option>
+      <option value="Lonely">Lonely</option>
+      <option value="Empty">Empty</option>
+      <option value="Wild">Wild</option>
+      <option value="Hopeful">Hopeful</option>
+      <option value="Melancholy">Melancholy</option>
+      <option value="Overstimulated">Overstimulated</option>
+      <option value="Delusional">Delusional</option>
+      <option value="Petty">Petty</option>
+      <option value="Dramatic">Dramatic</option>
+    </select>
+  </label>
+
+  <label>Location:
+    <select id="location">
+      <option value="Beach">Beach</option>
+      <option value="Forest">Forest</option>
+      <option value="Skyscraper">Skyscraper</option>
+      <option value="Desert">Desert</option>
+      <option value="Snow">Snow</option>
+      <option value="Grassland">Grassland</option>
+      <option value="Swamp">Swamp</option>
+      <option value="Airport">Airport</option>
+      <option value="Basement">Basement</option>
+      <option value="Mountain">Mountain</option>
+      <option value="ParkingLot">Parking Lot</option>
+      <option value="Library">Library</option>
+    </select>
+  </label>
+
+  <label>Activity:
+    <select id="activity">
+      <option value="Sleep">Sleep</option>
+      <option value="Dance">Dance</option>
+      <option value="SkinnyDip">SkinnyDip</option>
+      <option value="EatChicken">EatChicken</option>
+      <option value="Escape">Escape</option>
+      <option value="BeSilent">BeSilent</option>
+      <option value="BakeBread">Bake Bread</option>
+      <option value="StareBlankly">Stare Blankly</option>
+      <option value="RunInCircles">Run in Circles</option>
+      <option value="OverExplain">Over-Explain</option>
+      <option value="Mumble">Mumble</option>
+      <option value="BuildAShrine">Build a Shrine</option>
+    </select>
+  </label>
+
+  <br />
+  <button id="generateBtn">Reveal My Vacation</button>
+
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

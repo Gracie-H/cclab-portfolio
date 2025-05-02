@@ -18,7 +18,7 @@
       font-family: 'Helvetica Neue', sans-serif;
     }
 
-    /* 泡泡样式 */
+
     .bubble {
       position: absolute;
       bottom: -50px;
@@ -42,7 +42,7 @@
       }
     }
 
-    /* 卡片样式 */
+
     .quiz-page {
       position: relative;
       z-index: 2;
@@ -85,10 +85,10 @@
 </head>
 <body>
 
-  <!-- 泡泡容器 -->
+
   <div id="bubbles"></div>
 
-  <!-- 主卡片 -->
+  
   <div class="quiz-page">
     <h1>Welcome to The Healing Space</h1>
     <p>This is your healing check-in. Ready?</p>
@@ -100,7 +100,7 @@
       location.href = 'quiz.html';
     }
 
-    // 生成泡泡
+
     const bubbleContainer = document.getElementById('bubbles');
     for (let i = 0; i < 20; i++) {
       const bubble = document.createElement('div');
