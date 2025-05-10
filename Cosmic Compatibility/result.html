@@ -2,137 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cosmic Relationship Result</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: 'Noto Serif', serif;
-      background: radial-gradient(ellipse at center, #0c0c15 0%, #000000 100%);
-      color: #f5f0e1;
-      text-align: center;
+      font-family: 'Georgia', serif;
+      background: radial-gradient(ellipse at center, #0b0c2a, #000);
+      color: white;
       min-height: 100vh;
+      padding: 40px 20px;
+      overflow-x: hidden;
     }
 
-    h1 {
-      font-size: 2.2em;
+    .title {
+      text-align: center;
+      font-size: 2.5em;
       color: #ffd700;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
-    img {
-      max-width: 90%;
-      max-height: 60vh;
-      border: 2px solid gold;
-      margin: 20px 0;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+    .title img {
+      width: 40px;
+      height: 40px;
     }
 
-    .card {
+    .results-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .result-card {
       background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      margin: 30px auto;
-      max-width: 720px;
-      border: 1px solid #444;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 20px 30px;
+      min-width: 200px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.1);
+      flex: 1 1 220px;
     }
 
-    .label {
-      font-weight: bold;
-      color: #ffdd66;
-      margin-top: 20px;
-      font-size: 1.1em;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    .result-card h3 {
+      color: #ffd700;
+      margin-bottom: 10px;
     }
 
-    .value {
-      margin-bottom: 20px;
-      font-size: 1.2em;
-      color: #f0f0f0;
+    .nasa-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     }
 
     .oracle {
       font-style: italic;
-      color: #ffeecc;
-      font-size: 1.3em;
-      padding: 20px;
-      max-width: 700px;
-      margin: 30px auto;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 12px;
-      border: 1px solid #333;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(6px);
-    }
-
-    .image-caption {
-      color: #bbb;
-      font-style: italic;
-      margin-bottom: 20px;
+      color: #eee;
+      text-align: justify;
+      max-width: 900px;
+      margin: 30px auto 0;
+      line-height: 1.8;
     }
   </style>
 </head>
 <body>
-  <h1>🌌 Cosmic Relationship Result</h1>
-
-  <div class="card">
-    <div class="label">✨ Five Elements</div>
-    <div class="value" id="elementInfo"></div>
-
-    <div class="label">🔗 Relationship Type</div>
-    <div class="value" id="relationshipType"></div>
-
-    <div class="label">🌿 Energy Pattern</div>
-    <div class="value" id="relationshipPath"></div>
-
-    <div class="label">😊 Emotion Summary</div>
-    <div class="value" id="emotionSummary"></div>
-
-    <div class="label">🧠 Match Level</div>
-    <div class="value" id="matchLevel"></div>
+  <div class="title">
+    <!-- <img src="icon.png" alt="icon" /> -->
+    <span>Cosmic Relationship Result</span>
   </div>
 
-  <div class="oracle" id="aiOracle"></div>
+  <div class="results-row">
+    <div class="result-card">
+      <h3> Five Elements</h3>
+      <p id="element1"></p>
+    </div>
+    <div class="result-card">
+      <h3> Relationship Type</h3>
+      <p id="relationshipType"></p>
+    </div>
+    <div class="result-card">
+      <h3> Energy Pattern</h3>
+      <p id="energyPattern"></p>
+    </div>
+    <div class="result-card">
+      <h3> Emotion Summary</h3>
+      <p id="moodTag"></p>
+    </div>
+    <div class="result-card">
+      <h3> Match Level</h3>
+      <p id="match"></p>
+    </div>
+  </div>
 
-  <p class="image-caption">🖼️ The image below is a cosmic mirror — a visual echo of your shared energy.</p>
-  <img id="image" alt="NASA image" />
+  <img id="nasaImage" class="nasa-image" src="" alt="NASA background" />
+
+  <div class="oracle" id="aiOracle"></div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const img = params.get("img");
-    const title = params.get("title");
-    const desc = params.get("desc");
     const element1 = params.get("element1");
     const element2 = params.get("element2");
     const mood = params.get("mood");
     const match = params.get("match");
     const oracle = params.get("oracle");
 
-    document.getElementById("image").src = img;
-    document.getElementById("elementInfo").textContent = `${element1} & ${element2}`;
-    document.getElementById("matchLevel").textContent = match;
-    document.getElementById("emotionSummary").textContent = mood === "neutral"
-      ? "One face detected. Calm energy."
-      : `Mood detected: ${mood}`;
-    document.getElementById("aiOracle").textContent = `🔮 Oracle says: “${oracle}”`;
-
-    const key = element1 === element2 ? "Same" : `${element1}-${element2}`;
-    const reverseKey = `${element2}-${element1}`;
+    document.getElementById("element1").textContent = `${element1} & ${element2}`;
+    document.getElementById("moodTag").textContent = `One face detected. ${mood.charAt(0).toUpperCase() + mood.slice(1)} energy.`;
+    document.getElementById("match").textContent = match;
+    document.getElementById("nasaImage").src = img;
+    document.getElementById("aiOracle").innerHTML = `🔮 Oracle says: “${oracle}”`;
 
     fetch("five_element_data.json")
       .then(res => res.json())
       .then(data => {
+        let key = element1 === element2 ? "Same" : `${element1}-${element2}`;
+        let reverseKey = `${element2}-${element1}`;
         const matchEntry = data.find(e => e.pair === key || e.pair === reverseKey);
         if (matchEntry) {
           document.getElementById("relationshipType").textContent = matchEntry.type;
-          document.getElementById("relationshipPath").textContent = matchEntry.relationship_path;
+          document.getElementById("energyPattern").textContent = matchEntry.relationship_path;
         } else {
           document.getElementById("relationshipType").textContent = "Unknown";
-          document.getElementById("relationshipPath").textContent = "This elemental pair is undefined.";
+          document.getElementById("energyPattern").textContent = "No match found.";
         }
       });
   </script>

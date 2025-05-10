@@ -2,33 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cosmic Compatibility</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- ✅ 正确 face-api.js 引入 -->
   <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
-
-  <!-- ✅ puter.ai SDK -->
   <script defer src="https://js.puter.com/v2/"></script>
-
-  <!-- ✅ 主逻辑脚本 -->
   <script defer src="script.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: radial-gradient(circle at center, #0b0c2a, #000);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: twinkle 2.5s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .input-area {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+      text-align: center;
+      z-index: 1;
+      max-width: 90vw;
+      width: 480px;
+    }
+
+    .input-area h1 {
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    input[type="text"], input[type="date"] {
+      margin: 6px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+      width: 180px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #ffd700;
+      color: #000;
+      font-size: 1.1em;
+      font-weight: bold;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      margin-top: 15px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: #ffe066;
+    }
+
+    video {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border: 3px solid #ffd700;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      z-index: 1;
+    }
+
+    .loader {
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-top: 5px solid #ffd700;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 500px) {
+      input[type="text"], input[type="date"] {
+        width: 100%;
+        max-width: 90vw;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="stars" id="stars"></div>
+
   <div class="input-area">
     <h1>Cosmic Compatibility</h1>
+    <html lang="en">
     <input type="text" id="name" placeholder="Your Name">
-    <input type="text" id="other" placeholder="Partner Name">
-    <input type="date" id="birth1">
-    <input type="date" id="birth2">
+    <input type="text" id="other" placeholder="Partner Name"><br>
+    <input type="date" id="birth1" placeholder="MM/DD/YYYY">
+    <input type="date" id="birth2" placeholder="MM/DD/YYYY">    
     <button id="scanButton">Begin Scan</button>
 
-    <!-- 加载动画 -->
     <div id="loadingSpinner" style="display: none; margin-top: 15px;">
       <div class="loader"></div>
     </div>
   </div>
 
   <video id="video" autoplay muted playsinline></video>
+
+  <script>
+    // 生成星星背景
+    const starContainer = document.getElementById("stars");
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      const size = Math.random() * 2 + 1;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.animationDuration = `${2 + Math.random() * 2}s`;
+      starContainer.appendChild(star);
+    }
+  </script>
 </body>
 </html>
