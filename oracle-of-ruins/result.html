@@ -82,13 +82,20 @@
 
     document.getElementById("image").src = img;
 
+    // ✨ 设置五行组合
     document.getElementById("elementInfo").textContent = `${element1} & ${element2}`;
+
+    // 🌟 显示相似度等级
     document.getElementById("matchLevel").textContent = match;
+
+    // 😊 根据 mood 字段拼 emotion summary（你可以改）
     document.getElementById("emotionSummary").textContent = mood === "neutral"
       ? "One face detected. Calm energy."
       : `Mood detected: ${mood}`;
+
     document.getElementById("aiOracle").textContent = `🔮 Oracle says: “${oracle}”`;
 
+    // 🔗 查找五行关系数据
     const key = element1 === element2 ? "Same" : `${element1}-${element2}`;
     const reverseKey = `${element2}-${element1}`;
 
@@ -101,7 +108,7 @@
           document.getElementById("relationshipPath").textContent = matchEntry.relationship_path;
         } else {
           document.getElementById("relationshipType").textContent = "Unknown";
-          document.getElementById("relationshipPath").textContent = "No known pattern for this element pair.";
+          document.getElementById("relationshipPath").textContent = "This elemental pair is undefined.";
         }
       });
   </script>
