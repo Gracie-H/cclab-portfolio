@@ -1,3 +1,4 @@
+// 🌌 Enhanced Face Scan with Loading Animation
 let mood = "neutral";
 let match = "Unknown";
 
@@ -54,11 +55,24 @@ async function startCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     video.srcObject = stream;
-    console.log("✅ 摄像头已开启");
+    console.log("✅ Camera started");
   } catch (err) {
-    console.error("❌ 摄像头失败", err);
-    alert("⚠️ 无法访问摄像头，请检查权限或使用 Live Server");
+    console.error("❌ Camera error", err);
+    alert("⚠️ Please allow camera access and use HTTPS or Live Server");
   }
+}
+
+async function detectUntilFound(video, maxTries = 30, delay = 100) {
+  for (let i = 0; i < maxTries; i++) {
+    const detections = await faceapi.detectAllFaces(
+      video,
+      new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.2 })
+    ).withFaceLandmarks().withFaceExpressions().withFaceDescriptors();
+
+    if (detections.length >= 1) return detections;
+    await new Promise(res => setTimeout(res, delay));
+  }
+  return [];
 }
 
 async function startScan() {
@@ -66,26 +80,28 @@ async function startScan() {
   const name2 = document.getElementById("other").value;
   const birth1 = document.getElementById("birth1").value;
   const birth2 = document.getElementById("birth2").value;
+  const btn = document.getElementById("scanButton");
+  const loader = document.getElementById("loadingSpinner");
 
   if (!name1 || !name2 || !birth1 || !birth2) {
     alert("Please fill in all fields.");
     return;
   }
 
+  btn.disabled = true;
+  btn.textContent = "🔍 Scanning...";
+  loader.style.display = "block";
+
   const element1 = getElementByBirthMonth(birth1);
   const element2 = getElementByBirthMonth(birth2);
   const video = document.getElementById("video");
 
-  const detections = await faceapi.detectAllFaces(
-    video,
-    new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.5 })
-  )
-    .withFaceLandmarks()
-    .withFaceExpressions()
-    .withFaceDescriptors();
-
+  const detections = await detectUntilFound(video);
   if (detections.length < 1) {
-    alert("No face detected.");
+    alert("❌ No face detected. Try better lighting and positioning.");
+    btn.disabled = false;
+    btn.textContent = "Begin Scan";
+    loader.style.display = "none";
     return;
   }
 
@@ -118,22 +134,27 @@ async function startScan() {
     ? "supernova"
     : "binary stars";
 
-  // 🌌 prompt 占卜请求
-  const prompt = `We are not analyzing similarity, but generating a symbolic relationship in the universe.
-Two people, born under ${element1} and ${element2}, with moods ${mood1} and ${mood2}.
-${emotionSummary}
-Connection level: ${match}. It feels like: ${relationMeaning}.
-Visual inspiration: ${visualKeyword}.
-Write a poetic fortune about their cosmic bond.`;
+  const prompt = `We are not analyzing similarity, but generating a symbolic relationship in the universe.\nTwo people, born under ${element1} and ${element2}, with moods ${mood1} and ${mood2}.\n${emotionSummary}\nConnection level: ${match}. It feels like: ${relationMeaning}.\nVisual inspiration: ${visualKeyword}.\nWrite a poetic fortune about their cosmic bond.`;
 
-  const nasaRes = await fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=1");
-  const nasaData = await nasaRes.json();
-  const img = nasaData[0].url;
-  const title = nasaData[0].title;
-  const desc = nasaData[0].explanation;
+  let img = "", title = "", desc = "";
+  try {
+    const nasaRes = await fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=1");
+    const nasaData = await nasaRes.json();
+    img = nasaData[0].url;
+    title = nasaData[0].title;
+    desc = nasaData[0].explanation;
+  } catch (e) {
+    console.warn("NASA fetch failed:", e);
+  }
 
-  const aiReply = await puter.ai.chat(prompt);
+  let aiReply = "No oracle message available.";
+  try {
+    aiReply = await puter.ai.chat(prompt);
+  } catch (e) {
+    console.warn("AI fetch failed:", e);
+  }
 
+  loader.style.display = "none";
   const resultURL = `result.html?img=${encodeURIComponent(img)}&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}&element1=${element1}&element2=${element2}&mood=${mood1}&match=${match}&oracle=${encodeURIComponent(aiReply)}`;
   window.location.href = resultURL;
 }
