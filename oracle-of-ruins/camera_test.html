@@ -1,0 +1,49 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Camera Test</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+    video {
+      margin-top: 20px;
+      width: 640px;
+      height: 480px;
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎥 Camera Test</h1>
+  <p>If your camera works, you will see yourself below.</p>
+  <video id="video" autoplay muted playsinline></video>
+
+  <script>
+    async function openCamera() {
+      const videoElement = document.getElementById("video");
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("❌ Your browser does not support getUserMedia. Please use a modern browser like Chrome or Edge.");
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        videoElement.srcObject = stream;
+        console.log("✅ Camera stream started.");
+      } catch (err) {
+        console.error("❌ Failed to access the camera:", err);
+        alert("⚠️ Could not access camera.\n\nPossible reasons:\n1. Not using HTTPS or Live Server\n2. Camera permissions denied\n3. No camera available");
+      }
+    }
+
+    openCamera();
+  </script>
+</body>
+</html> -->

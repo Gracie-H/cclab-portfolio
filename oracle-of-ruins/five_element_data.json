@@ -1,0 +1,92 @@
+[
+  {
+    "pair": "Wood-Fire",
+    "type": "Creative Resonance",
+    "description": "Wood fuels Fire — you inspire each other toward growth and brilliance. But uncontained passion might burn the roots.",
+    "energy": "expansive",
+    "visual_keyword": "stellar jet",
+    "relationship_path": "Momentum toward inspiration, but needs grounding.",
+    "ui_theme": "fire"
+  },
+  {
+    "pair": "Fire-Earth",
+    "type": "Burning Foundation",
+    "description": "Fire produces Earth — you might create something stable through dynamic exchange. Passion becomes matter.",
+    "energy": "stabilizing",
+    "visual_keyword": "lava field",
+    "relationship_path": "Potential for building something meaningful from intense experiences.",
+    "ui_theme": "earth"
+  },
+  {
+    "pair": "Earth-Metal",
+    "type": "Solid Trust",
+    "description": "Earth creates Metal — structured and supportive. This is a dependable bond, though it may feel rigid.",
+    "energy": "compressed",
+    "visual_keyword": "crater surface",
+    "relationship_path": "A grounded bond that offers stability if not overwhelmed by routine.",
+    "ui_theme": "metal"
+  },
+  {
+    "pair": "Metal-Water",
+    "type": "Flowing Structure",
+    "description": "Metal condenses Water — clarity meets intuition. This bond feels precise and emotional at once.",
+    "energy": "flowing",
+    "visual_keyword": "icy moon",
+    "relationship_path": "Balance between control and release defines your shared direction.",
+    "ui_theme": "water"
+  },
+  {
+    "pair": "Water-Wood",
+    "type": "Seeded Growth",
+    "description": "Water nourishes Wood — gentle but powerful. This is a nurturing connection that supports dreams.",
+    "energy": "resonant",
+    "visual_keyword": "spiral galaxy",
+    "relationship_path": "Slow but lasting development through empathy and shared hope.",
+    "ui_theme": "wood"
+  },
+  {
+    "pair": "Fire-Water",
+    "type": "Tension Arc",
+    "description": "Water extinguishes Fire — emotional friction defines this relationship. It can be explosive or healing.",
+    "energy": "explosive",
+    "visual_keyword": "supernova",
+    "relationship_path": "Intense connection with transformative potential. Handle with care.",
+    "ui_theme": "fire"
+  },
+  {
+    "pair": "Wood-Metal",
+    "type": "Creative Clash",
+    "description": "Metal chops Wood — one seeks structure, the other growth. This bond challenges and sharpens.",
+    "energy": "frictional",
+    "visual_keyword": "colliding galaxies",
+    "relationship_path": "Conflicts may spark innovation or destruction. Choice defines fate.",
+    "ui_theme": "metal"
+  },
+  {
+    "pair": "Earth-Water",
+    "type": "Dissolving Stability",
+    "description": "Water erodes Earth — this connection moves beneath the surface. Deep shifts take time.",
+    "energy": "absorbing",
+    "visual_keyword": "river delta",
+    "relationship_path": "Patience is required. Great changes come slowly and invisibly.",
+    "ui_theme": "water"
+  },
+  {
+    "pair": "Metal-Fire",
+    "type": "Reforged Conflict",
+    "description": "Fire melts Metal — a bond of transformation. From pressure comes new shape.",
+    "energy": "catalytic",
+    "visual_keyword": "solar flare",
+    "relationship_path": "Volatile but potentially empowering. Shape your chaos together.",
+    "ui_theme": "fire"
+  },
+  {
+    "pair": "Same",
+    "type": "Mirror Echo",
+    "description": "You reflect each other’s essence. Harmony or stagnation? That depends on your willingness to evolve.",
+    "energy": "cyclical",
+    "visual_keyword": "binary stars",
+    "relationship_path": "Aligned traits magnify strengths or weaknesses. Move with intention.",
+    "ui_theme": "balanced"
+  }
+]
