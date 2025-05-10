@@ -3,127 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cosmic Connection</title>
+  <title>Cosmic Compatibility - Start</title>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      padding: 0;
       background: radial-gradient(circle at center, #0b0c2a, #000);
-      color: #f0f0f0;
+      color: #fff;
       font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
       overflow: hidden;
     }
 
-    .stars {
+    .scene {
+      width: 500px;
+      height: 620px;
+      perspective: 1200px;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.4), 0 0 80px rgba(255, 215, 0, 0.2);
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card .face {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: transparent;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .star {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      width: 2px;
-      height: 2px;
-      animation: twinkle 4s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    .container {
-      padding: 40px;
-      max-width: 800px;
-      position: relative;
-      z-index: 1;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      padding: 30px;
       text-align: justify;
+      flex-direction: column;
     }
 
-    h1 {
-      font-size: 2.8em;
+    .card .front {
+      background: linear-gradient(135deg, #1e1e2f, #3a2d50);
+    }
+
+    .card .front h2 {
+      font-size: 1.8em;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .card .back {
+      background: rgba(0, 0, 0, 0.8);
+      transform: rotateY(180deg);
+    }
+
+    .card .back h1 {
+      font-size: 2.2em;
       color: #ffd700;
       margin-bottom: 20px;
       text-align: center;
+      text-shadow:
+        0 0 10px rgba(255, 215, 0, 0.9),
+        0 0 20px rgba(255, 200, 0, 0.7),
+        0 0 30px rgba(255, 190, 0, 0.5);
     }
 
-    p {
-      font-size: 1.2em;
-      line-height: 1.6em;
+    .card .back p {
+      font-size: 1.1em;
+      line-height: 1.7;
       color: #ccc;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       text-align: justify;
     }
 
-    button {
+    .card .back .button-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card .back button {
       background-color: #ffd700;
       color: #000;
-      font-size: 1.2em;
+      font-size: 1.1em;
       font-weight: bold;
-      padding: 14px 30px;
+      padding: 12px 28px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      display: block;
-      margin: 0 auto;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
     }
 
-    button:hover {
-      background-color: #ffe066;
+    .card .back button:hover {
       transform: scale(1.05);
+      background-color: #ffe066;
     }
 
-    .header-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 16px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
   </style>
 </head>
 <body>
   <div class="stars" id="stars"></div>
-  <div class="container">
-    <img class="header-image" src="your_image_here.jpg" alt="Cosmic illustration">
-    <h1>Cosmic Compatibility</h1>
-    <p>
-      This experience reveals the invisible forces between two people — their emotional resonance,
-      elemental energy, and the subtle vibrations that define their cosmic connection.
-      By analyzing two faces and birth energies, this project offers a symbolic look into your
-      relationship's trajectory: harmony or tension, attraction or distance — the universe reflects it all.
-    </p>
-    <button onclick="window.location.href='scan.html'">Begin the Scan</button>
+  <div class="scene" onclick="flipCard()">
+    <div class="card" id="card">
+      <div class="face front">
+        <h2>Tap to Reveal Your Cosmic Bond</h2>
+      </div>
+      <div class="face back">
+        <div>
+          <h1>Cosmic Compatibility</h1>
+          <p>
+            This experience reveals the invisible forces between two people — their emotional resonance,
+            elemental energy, and the subtle vibrations that define their cosmic connection.
+            By analyzing two faces and birth energies, this project offers a symbolic look into your
+            relationship's trajectory: harmony or tension, attraction or distance — the universe reflects it all.
+          </p>
+          <div class="button-wrapper">
+            <button onclick="location.href='scan.html'; event.stopPropagation();">Begin the Scan</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <audio autoplay loop>
-    <source src="A.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
-    const starContainer = document.getElementById("stars");
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.top = Math.random() * 100 + "%";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.animationDuration = (2 + Math.random() * 3) + "s";
-      starContainer.appendChild(star);
+    function flipCard() {
+      const card = document.getElementById('card');
+      card.classList.add('flipped');
     }
+    // 生成小星星
+const starContainer = document.getElementById("stars");
+for (let i = 0; i < 80; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.left = Math.random() * 100 + "%";
+  const size = Math.random() * 2 + 1;
+  star.style.width = `${size}px`;
+  star.style.height = `${size}px`;
+  star.style.animationDuration = `${2 + Math.random() * 3}s`;
+  starContainer.appendChild(star);
+}
+
   </script>
 </body>
 </html>
