@@ -36,19 +36,6 @@ function getTopEmotion(expressions) {
   return top;
 }
 
-function interpretEmotion(emotion) {
-  switch (emotion) {
-    case "happy": return "joyful";
-    case "sad": return "heavy";
-    case "angry": return "tense";
-    case "surprised": return "electric";
-    case "fearful": return "uncertain";
-    case "disgusted": return "repelled";
-    case "neutral": return "calm";
-    default: return "undefined";
-  }
-}
-
 async function startCamera() {
   const video = document.getElementById("video");
   try {
@@ -76,55 +63,21 @@ async function startScan() {
   const element2 = getElementByBirthMonth(birth2);
   const video = document.getElementById("video");
 
-  const detections = await faceapi.detectAllFaces(
-    video,
-    new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.5 })
-  )
+  const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
     .withFaceLandmarks()
     .withFaceExpressions()
     .withFaceDescriptors();
 
-  if (detections.length < 1) {
+  if (detections.length >= 1) {
+    mood = getTopEmotion(detections[0].expressions);
+    if (detections.length >= 2) {
+      const dist = faceapi.euclideanDistance(detections[0].descriptor, detections[1].descriptor);
+      match = dist > 0.6 ? "Low" : dist > 0.4 ? "Medium" : "High";
+    }
+  } else {
     alert("No face detected.");
     return;
   }
-
-  const face1 = detections[0];
-  const mood1 = getTopEmotion(face1.expressions);
-  let mood2 = "neutral";
-  let dist = null;
-
-  if (detections.length >= 2) {
-    const face2 = detections[1];
-    mood2 = getTopEmotion(face2.expressions);
-    dist = faceapi.euclideanDistance(face1.descriptor, face2.descriptor);
-    match = dist < 0.4 ? "High" : dist < 0.6 ? "Medium" : "Low";
-  } else {
-    mood2 = "neutral";
-    match = "Unknown";
-  }
-
-  const emotionSummary = `One feels ${interpretEmotion(mood1)}, the other ${interpretEmotion(mood2)}.`;
-  const relationMeaning =
-    match === "High"
-      ? "These two faces resonate like twin stars."
-      : match === "Medium"
-      ? "They orbit close, but with friction."
-      : "Distant energies, moving in separate constellations.";
-
-  const visualKeyword = match === "High"
-    ? "spiral galaxy"
-    : match === "Medium"
-    ? "supernova"
-    : "binary stars";
-
-  // 🌌 prompt 占卜请求
-  const prompt = `We are not analyzing similarity, but generating a symbolic relationship in the universe.
-Two people, born under ${element1} and ${element2}, with moods ${mood1} and ${mood2}.
-${emotionSummary}
-Connection level: ${match}. It feels like: ${relationMeaning}.
-Visual inspiration: ${visualKeyword}.
-Write a poetic fortune about their cosmic bond.`;
 
   const nasaRes = await fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=1");
   const nasaData = await nasaRes.json();
@@ -132,8 +85,9 @@ Write a poetic fortune about their cosmic bond.`;
   const title = nasaData[0].title;
   const desc = nasaData[0].explanation;
 
+  const prompt = `Write a poetic message about two people with ${element1} and ${element2} energy, feeling ${mood}, match ${match}`;
   const aiReply = await puter.ai.chat(prompt);
 
-  const resultURL = `result.html?img=${encodeURIComponent(img)}&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}&element1=${element1}&element2=${element2}&mood=${mood1}&match=${match}&oracle=${encodeURIComponent(aiReply)}`;
+  const resultURL = `result.html?img=${encodeURIComponent(img)}&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}&element1=${element1}&element2=${element2}&mood=${mood}&match=${match}&oracle=${encodeURIComponent(aiReply)}`;
   window.location.href = resultURL;
 }
