@@ -6,7 +6,8 @@
     "energy": "expansive",
     "visual_keyword": "stellar jet",
     "relationship_path": "Momentum toward inspiration, but needs grounding.",
-    "ui_theme": "fire"
+    "ui_theme": "fire",
+    "match": "High"
   },
   {
     "pair": "Fire-Earth",
@@ -15,7 +16,8 @@
     "energy": "stabilizing",
     "visual_keyword": "lava field",
     "relationship_path": "Potential for building something meaningful from intense experiences.",
-    "ui_theme": "earth"
+    "ui_theme": "earth",
+    "match": "High"
   },
   {
     "pair": "Earth-Metal",
@@ -24,7 +26,8 @@
     "energy": "compressed",
     "visual_keyword": "crater surface",
     "relationship_path": "A grounded bond that offers stability if not overwhelmed by routine.",
-    "ui_theme": "metal"
+    "ui_theme": "metal",
+    "match": "Medium"
   },
   {
     "pair": "Metal-Water",
@@ -33,7 +36,8 @@
     "energy": "flowing",
     "visual_keyword": "icy moon",
     "relationship_path": "Balance between control and release defines your shared direction.",
-    "ui_theme": "water"
+    "ui_theme": "water",
+    "match": "High"
   },
   {
     "pair": "Water-Wood",
@@ -42,7 +46,8 @@
     "energy": "resonant",
     "visual_keyword": "spiral galaxy",
     "relationship_path": "Slow but lasting development through empathy and shared hope.",
-    "ui_theme": "wood"
+    "ui_theme": "wood",
+    "match": "High"
   },
   {
     "pair": "Fire-Water",
@@ -51,7 +56,8 @@
     "energy": "explosive",
     "visual_keyword": "supernova",
     "relationship_path": "Intense connection with transformative potential. Handle with care.",
-    "ui_theme": "fire"
+    "ui_theme": "fire",
+    "match": "Low"
   },
   {
     "pair": "Wood-Metal",
@@ -60,7 +66,8 @@
     "energy": "frictional",
     "visual_keyword": "colliding galaxies",
     "relationship_path": "Conflicts may spark innovation or destruction. Choice defines fate.",
-    "ui_theme": "metal"
+    "ui_theme": "metal",
+    "match": "Low"
   },
   {
     "pair": "Earth-Water",
@@ -69,7 +76,8 @@
     "energy": "absorbing",
     "visual_keyword": "river delta",
     "relationship_path": "Patience is required. Great changes come slowly and invisibly.",
-    "ui_theme": "water"
+    "ui_theme": "water",
+    "match": "Medium"
   },
   {
     "pair": "Metal-Fire",
@@ -78,7 +86,8 @@
     "energy": "catalytic",
     "visual_keyword": "solar flare",
     "relationship_path": "Volatile but potentially empowering. Shape your chaos together.",
-    "ui_theme": "fire"
+    "ui_theme": "fire",
+    "match": "Medium"
   },
   {
     "pair": "Same",
@@ -87,6 +96,7 @@
     "energy": "cyclical",
     "visual_keyword": "binary stars",
     "relationship_path": "Aligned traits magnify strengths or weaknesses. Move with intention.",
-    "ui_theme": "balanced"
+    "ui_theme": "balanced",
+    "match": "Medium"
   }
 ]

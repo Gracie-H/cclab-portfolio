@@ -1,6 +1,6 @@
 // 🌌 Enhanced Face Scan with Loading Animation
 let mood = "neutral";
-let match = "Unknown";
+let match = "unknown";
 
 window.onload = () => {
   loadModelsAndStartCamera();
@@ -117,7 +117,8 @@ async function startScan() {
     match = dist < 0.4 ? "High" : dist < 0.6 ? "Medium" : "Low";
   } else {
     mood2 = "neutral";
-    match = "Unknown";
+    const levels = ["Low", "Medium", "High"];
+  match = levels[Math.floor(Math.random() * levels.length)];
   }
 
   const emotionSummary = `One feels ${interpretEmotion(mood1)}, the other ${interpretEmotion(mood2)}.`;
@@ -155,6 +156,8 @@ async function startScan() {
   }
 
   loader.style.display = "none";
+
+  // 🔗 Final URL with match included
   const resultURL = `result.html?img=${encodeURIComponent(img)}&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}&element1=${element1}&element2=${element2}&mood=${mood1}&match=${match}&oracle=${encodeURIComponent(aiReply)}`;
   window.location.href = resultURL;
 }
